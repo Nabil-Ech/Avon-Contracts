@@ -1,0 +1,58 @@
+Business Source License 1.1
+
+Parameters
+Licensor: Avon Tech Ltd.
+Licensed Work: All source code and related files in this repository,
+               except where a file header or subdirectory LICENSE specifies otherwise.
+Additional Use Grant: None
+Change Date: 2029-10-15
+Change License: GNU General Public License v2.0 or later
+
+================================================================
+
+Business Source License 1.1
+
+Terms
+
+The Licensor hereby grants you the right to copy, modify, create derivative
+works, redistribute, and make non-production use of the Licensed Work.
+The Licensor may make an Additional Use Grant, above, permitting limited
+production use.
+
+Effective on the Change Date, the License granted hereunder will automatically
+convert to a license under the Change License, as defined above.
+
+Before the Change Date, any production use of the Licensed Work requires
+a written commercial license from the Licensor.
+
+For the full text and FAQs, see: https://mariadb.com/bsl11/
+
+================================================================
+
+Scope of License
+
+Unless a file header or subdirectory LICENSE states otherwise,
+**all files in this repository are licensed under the Business Source License 1.1**
+as described in this document.
+
+================================================================
+
+Notice of Upstream Code
+
+Portions of this software are derived from the following open source works:
+
+- Solady RedBlackTreeLib  
+  Copyright (c) Vectorized  
+  Licensed under the MIT License  
+  https://github.com/vectorized/solady
+
+- BokkyPooBah's Red-Black Tree Library  
+  Copyright (c) 2017 Bokkypoobah  
+  Licensed under the MIT License  
+  https://github.com/bokkypoobah/BokkyPooBahsRedBlackTreeLibrary
+
+These portions remain under their original MIT licenses.  
+A copy of the MIT license text is provided in `LICENSE-MIT.txt`.
+
+All modifications and additions are © Avon, licensed under the Business Source
+License 1.1 as specified above.

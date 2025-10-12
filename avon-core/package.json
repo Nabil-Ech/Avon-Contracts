@@ -1,0 +1,18 @@
+{
+  "name": "avon-core",
+  "version": "1.0.0",
+  "description": "Avon is a order book based lending protocol",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "build": "forge build && forge fmt",
+    "test": "forge test",
+    "coverage": "forge coverage --via-ir --ir-minimum"
+  },
+  "keywords": [],
+  "author": "Avon Labs",
+  "license": "ISC"
+}

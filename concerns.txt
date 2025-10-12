@@ -1,0 +1,11 @@
+Can a borrower prevent liquidation ?
+Are pool params changable ?
+Is there any check for oracle ?
+What happens if oracle is stale
+pool itseflf is granted executor and proposer role
+what happend in bad dept
+keep an eye on approve d tafer
+How ;uch can u trust pool manager 
+is there a possibllity where user levrage deposite and withdrawal to play with batch
+insertorderbook so that the pool nevers gets selected
+After withdrawal, order is no longer valid 
