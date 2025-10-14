@@ -20,6 +20,7 @@ library LiquidityAllocator {
         view
         returns (uint64[] memory rates, uint256[] memory liquidity)
     {
+        // even if tickcount is 10, the quoute is 1
         uint16 quoteSuggestions = tickCount > 10 ? PoolConstants.QUOTE_SUGGESTIONS : tickCount;
         rates = new uint64[](quoteSuggestions);
         liquidity = new uint256[](quoteSuggestions);

@@ -9,3 +9,7 @@ How ;uch can u trust pool manager
 is there a possibllity where user levrage deposite and withdrawal to play with batch
 insertorderbook so that the pool nevers gets selected
 After withdrawal, order is no longer valid 
+
+Check what would happen before whitelisting the pool, what can the pool manager or any user do to manipulate accounting ?
+
+ORACLE_PRICE_SCALE = 1e36; yet not every oracle gets 1e18

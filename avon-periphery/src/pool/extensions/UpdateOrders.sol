@@ -15,6 +15,7 @@ library UpdateOrders {
     /// @notice Recompute liquidity quotes and update orderbook with suggested quotes.
     /// @param s Pool storage state.
     function _updateOrders(PoolStorage.PoolState storage s) internal {
+        // what would happen if the protocol experience a loss and totalSupplyAssets < totalBorrowAssets ?
         uint256 totalLiquidity = s.totalSupplyAssets - s.totalBorrowAssets;
         uint16 tickCount = _getTicks(totalLiquidity, s.config.oracle);
         (uint64[] memory rates, uint256[] memory liquidity) =

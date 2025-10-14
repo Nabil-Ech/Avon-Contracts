@@ -180,6 +180,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
 
         for (uint256 i; i < length; ++i) {
             if (amounts[i] == 0) break;
+            // there is a possibility where rs[i + 1] = irs[i]
             if (length > i + 1 && irs[i + 1] <= irs[i]) revert ErrorsLib.OrdersNotOrdered();
             lenderTree._insertOrder(true, irs[i], uint64(ltv), amounts[i]);
             poolOrders[msg.sender].push(irs[i]);

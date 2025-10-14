@@ -87,7 +87,7 @@ contract AvonPool is ERC4626, Pausable, TimelockController, IPoolImplementation 
         // Pool manager can grant/revoke through wrapper functions
         _setRoleAdmin(AUCTION_ROLE, PROPOSER_ROLE);
     }
-
+    
     modifier onlyPoolManagerORProposerRole() {
         if (msg.sender != PoolStorage._state().poolManager && !hasRole(PROPOSER_ROLE, msg.sender)) {
             revert PoolErrors.Unauthorized();

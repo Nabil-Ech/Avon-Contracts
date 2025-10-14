@@ -114,7 +114,7 @@ contract TimelockController is AccessControl, ERC721Holder, ERC1155Holder {
      */
     constructor(uint256 minDelay, address[] memory proposers, address[] memory executors, address admin) {
         // self administration
-        _grantRole(DEFAULT_ADMIN_ROLE, address(this));
+        _grantRole(DEFAULT_ADMIN_ROLE, address(this)); // AvonPoll address as admin
 
         // optional admin
         if (admin != address(0)) {
