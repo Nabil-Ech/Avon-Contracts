@@ -19,6 +19,7 @@ library PositionGuard {
     /// @return True if the position is safe, false otherwise.
     function _isPositionSafe(PoolStorage.PoolState storage s, address borrower) internal view returns (bool) {
         PoolStorage.Position memory position = s.positions[borrower];
+        // is there a possibility where borrow shares = 0? 
         if (position.borrowShares == 0) return true;
 
         uint256 assetRatio = uint256(PoolConstants.WAD).toAssetsUp(s.totalBorrowAssets, s.totalBorrowShares);

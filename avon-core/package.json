@@ -14,5 +14,8 @@
   },
   "keywords": [],
   "author": "Avon Labs",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.4.0"
+  }
 }
