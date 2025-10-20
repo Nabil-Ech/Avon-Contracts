@@ -13,3 +13,6 @@ After withdrawal, order is no longer valid
 Check what would happen before whitelisting the pool, what can the pool manager or any user do to manipulate accounting ?
 
 ORACLE_PRICE_SCALE = 1e36; yet not every oracle gets 1e18
+
+pool manager can sabottage rival pool in favor of his
+
