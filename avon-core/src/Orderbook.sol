@@ -257,7 +257,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
         if (ltv == 0) {
             ltv = OrderbookLib.MIN_LTV;
         }
-
+        // we need to test this, its unfair for the other pool outside the first 300 see line 122
         MatchedOrder memory matchedOrder = lenderTree._matchOrder(false, rate, ltv, amount);
 
         uint256 amountReceived;
@@ -270,7 +270,8 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
             uint256 totalCollateral;
 
             // 1. Aggregate amounts by pool (O(n^2) but acceptable for small n)
-            (poolData, uniquePoolCount) = _aggregatePoolData(matchedOrder);
+            (poolData, uniquePoolCount) = _aggregatePoolData(matchedOrder); // returns list of unique pools that will supply the loan
+
 
             // 2. Update collateral fields in poolData using the helper function
             totalCollateral = _calculateAndSetPoolCollateral(poolData, uniquePoolCount, msg.sender, collateralBuffer);
@@ -592,6 +593,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
         view
         returns (PoolData[] memory poolData_, uint256 uniquePoolCount_)
     {
+        // only withing first 30 pools
         uint256 matchedOrderCount_ = matchedOrder_.totalCount;
         poolData_ = new PoolData[](matchedOrderCount_);
 

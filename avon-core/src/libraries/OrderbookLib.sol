@@ -109,7 +109,9 @@ library OrderbookLib {
                         matchedOrders.totalCount++;
                         recordDetails = matchedCount < MAX_MATCH_DETAILS;
                     }
-
+                    // something weird with this,
+                    ///@audit: if we surpass MAX_MATCH_DETAILS, 
+                    //why modifying entry values yet not includ them as conterparties?
                     matchedOrders.totalMatched += fill;
                     remaining -= fill;
 
@@ -121,6 +123,7 @@ library OrderbookLib {
 
                     if (entry.amount == 0) {
                         tree.removeEntry(compositeKey, i);
+                        // why reducing the number here ?
                         entriesCount--;
 
                         if (entriesCount == 0) {
