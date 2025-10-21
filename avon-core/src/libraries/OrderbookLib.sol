@@ -84,7 +84,7 @@ library OrderbookLib {
         uint256 remaining = amount;
         bool recordDetails = matchedCount < MAX_MATCH_DETAILS;
 
-        bytes32 currentPtr = tree.first();
+        bytes32 currentPtr = tree.first(); // return the smallest value (rate term) of the tree
         while (remaining > 0 && currentPtr != bytes32(0) && recordDetails) {
             if (gasleft() < MIN_REMAINING_GAS) break;
 
@@ -118,7 +118,8 @@ library OrderbookLib {
                     emit EventsLib.OrderMatched(
                         isLender ? msg.sender : entry.account, isLender ? entry.account : msg.sender, rate, ltv, fill
                     );
-
+                    // if remaining is still none zero and recordDetails is false,
+                    // the pool will entry will be modifier, yet its not recorded in matchedOrders
                     entry.amount = entry.amount - fill;
 
                     if (entry.amount == 0) {

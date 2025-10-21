@@ -31,7 +31,7 @@ library BorrowRepay {
     ) internal returns (uint256, uint256) {
         if (receiver == address(0)) revert PoolErrors.ZeroAddress();
         if (!s._isSenderPermitted(onBehalf)) revert PoolErrors.Unauthorized();
-
+        // it should not be checked her 
         // Check borrow cap
         if (s.borrowCap > 0 && s.totalBorrowAssets + assets > s.borrowCap) {
             revert PoolErrors.BorrowCapExceeded();

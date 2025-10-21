@@ -19,3 +19,6 @@ pool manager can sabottage rival pool in favor of his
 is ther a possibility where depositor deposits right befor loan repayement, so he can gain ?
 
 §In OrderBook, MatchmarketBorrowOrder, is there a possibility where the pools with matching rate don't satify the loan Amount combined? in that case what happen to the collateral ?
+
+when pool updated order, he must chekc of the amount to loan is withing the borrow cap,
+in such case the pool can revert  the borrow transaction if borrowcap exceeded

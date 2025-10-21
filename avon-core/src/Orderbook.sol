@@ -48,6 +48,7 @@ contract OrderbookStorage {
     /// @dev Address that receives matching fees
     address public feeRecipient;
 
+    // inconsistence with loqn qnd collateral token
     /// @dev Flat matching fee amount in loan token
     uint256 public flatMatchingFee;
 

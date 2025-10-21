@@ -864,7 +864,7 @@ contract AvonPool is ERC4626, Pausable, TimelockController, IPoolImplementation 
         view
         returns (uint256 collateralAmount)
     {
-        return PoolStorage._state().previewBorrow(borrower, assets, collateralBuffer);
+        return PoolStorage._state().borrow(borrower, assets, collateralBuffer);
     }
 
     /// @inheritdoc IPoolImplementation
