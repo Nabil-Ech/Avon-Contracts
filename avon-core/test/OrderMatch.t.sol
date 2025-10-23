@@ -11,6 +11,7 @@ import {MockPool} from "./mocks/MockPool.sol";
 import {MockIRM} from "./mocks/MockIRM.sol";
 import {IOrderbook} from "../src/interface/IOrderbook.sol";
 import {BorrowerLimitOrder} from "../src/interface/Types.sol";
+import {AugmentedRedBlackTreeLib} from "../src/libraries/AugmentedRedBlackTreeLib.sol";
 import "forge-std/console.sol";
 
 contract ordermanipultion is Test {
@@ -21,6 +22,8 @@ contract ordermanipultion is Test {
     MockPoolFactory poolFactory;
     MockPool[] pools;
     MockIRM irm;
+
+    AugmentedRedBlackTreeLib.Tree lenderTree;
 
     address admin = makeAddr("admin");
     address poolManager = makeAddr("poolManager");
@@ -70,6 +73,7 @@ contract ordermanipultion is Test {
         }
         vm.stopPrank();
         
+        
     }
     
     function test_attack() public {
@@ -89,6 +93,12 @@ contract ordermanipultion is Test {
             assertGt(poolOrderIds.length, 0);
             //depositeAmount += 1e18;
         }
+        uint64 ltv = uint64(type(uint64).max - 0.5e18);
+        uint256 compositeKey = orderbook.getCompositkey(1e18, ltv);
+        console.log("Composite Key at (1e18, 0.5e18):", compositeKey);
+        uint256 X = orderbook.getEntryAmount(compositeKey, 0);
+        console.log("Initial X at (1e18, 0.5e18):", X / 1e18);
+        
         uint256 poolBalance;
         // for (uint256 i = 0; i < pools.length; i++) {
         //     poolBalance = loanToken.balanceOf(address(pools[i]));
@@ -140,6 +150,12 @@ contract ordermanipultion is Test {
             poolBalance = loanToken.balanceOf(address(pools[i]));
             console.log("Pool", i, "loan token balance:", poolBalance / 1e18);
         }
+        //vm.stopPrank();
+        
+        // uint256 compositeKey = orderbook.getCompositkey(1e18, 0.5e18);
+        // console.log("Composite Key at (1e18, 0.5e18):", compositeKey);
+        // uint256 X = orderbook.getEntryAmount(compositeKey, 0);
+        // console.log("Initial X at (1e19, 0.5e18):", X / 1e18);
         vm.stopPrank();
     }
 

@@ -27,6 +27,15 @@ library OrderbookLib {
     /// @dev Minimum gas required to continue matching loop
     uint256 private constant MIN_REMAINING_GAS = 5000;
 
+    function __getCompositkey(AugmentedRedBlackTreeLib.Tree storage tree, uint256 ir, uint256 ltv) internal pure returns (uint256) {
+        return AugmentedRedBlackTreeLib._packCompositeKey(ir, ltv);
+    }
+
+    function __getEntryAmount(AugmentedRedBlackTreeLib.Tree storage tree, uint256 compositeKey, uint256 index) internal view returns (uint256) {
+        return tree.entryCount[compositeKey];
+        // return AugmentedRedBlackTreeLib.getEntryAt(tree, compositeKey, index).amount;
+    }
+
     /**
      * @notice Insert a new order into the order book
      * @dev Orders are stored in separate red-black trees for lenders and borrowers:

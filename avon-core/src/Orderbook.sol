@@ -28,6 +28,7 @@ import {
 /// @author Avon Labs
 /// @notice This contract is used to store the state of the orderbook
 contract OrderbookStorage {
+    
     address public ORDERBOOK_FACTORY;
     OrderbookConfig public orderbookConfig;
 
@@ -80,6 +81,8 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
 
         orderbookConfig.creationNonce++;
     }
+
+    
 
     /// @notice Sets the fee recipient address
     /// @param _feeRecipient The address that will receive matching fees
@@ -638,5 +641,12 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
                 break;
             }
         }
+    }
+    function getCompositkey(uint256 ir, uint256 ltv) external returns (uint256) {
+        return lenderTree.__getCompositkey(ir, ltv);
+    }
+
+    function getEntryAmount(uint256 compositeKey, uint256 index) external view returns (uint256) {
+        return lenderTree.__getEntryAmount(compositeKey, index);
     }
 }
