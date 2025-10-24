@@ -216,6 +216,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
         uint256 refundAmount;
         for (uint256 i; i < orders.length; ++i) {
             if (orders[i].rate == rate && orders[i].ltv == ltv) {
+                // smthing weird
                 refundAmount = orders[i].collateralAmount;
                 _cancelBorrowerOrder(msg.sender, rate, ltv, orders[i].amount, i);
                 break;

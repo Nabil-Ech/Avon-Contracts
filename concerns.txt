@@ -22,3 +22,5 @@ is ther a possibility where depositor deposits right befor loan repayement, so h
 
 when pool updated order, he must chekc of the amount to loan is withing the borrow cap,
 in such case the pool can revert  the borrow transaction if borrowcap exceeded
+
+borrower can retrive more collate by insert limit borrower 
