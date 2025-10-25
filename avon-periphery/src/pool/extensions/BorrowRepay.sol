@@ -30,6 +30,7 @@ library BorrowRepay {
         uint256 minAmountExpected
     ) internal returns (uint256, uint256) {
         if (receiver == address(0)) revert PoolErrors.ZeroAddress();
+        // sender permission check, keep an ee for it 
         if (!s._isSenderPermitted(onBehalf)) revert PoolErrors.Unauthorized();
         // it should not be checked her 
         // Check borrow cap
@@ -47,6 +48,7 @@ library BorrowRepay {
         s.positions[onBehalf].updatedAt = s.lastUpdate;
 
         if (!s._isPositionSafe(onBehalf)) revert PoolErrors.InsufficientCollateral();
+        // what happens in case of losses, liquidation ?
         if (s.totalBorrowAssets > s.totalSupplyAssets) revert PoolErrors.InsufficientLiquidity();
         if (assets < minAmountExpected) revert PoolErrors.InsufficientAmountReceived();
 
@@ -123,6 +125,7 @@ library BorrowRepay {
 
         s.positions[onBehalf].borrowShares -= shares;
         s.totalBorrowShares -= shares;
+        // keep an eye on this subtraction
         s.totalBorrowAssets = s.totalBorrowAssets > assets ? s.totalBorrowAssets - assets : 0;
         s.positions[onBehalf].poolBorrowAssets = s.totalBorrowAssets;
         s.positions[onBehalf].poolBorrowShares = s.totalBorrowShares;

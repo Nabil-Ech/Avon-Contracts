@@ -14,13 +14,16 @@ Check what would happen before whitelisting the pool, what can the pool manager 
 
 ORACLE_PRICE_SCALE = 1e36; yet not every oracle gets 1e18
 
-pool manager can sabottage rival pool in favor of his
+pool manager can sabottage rival pool in favor of his => OK
 
-is ther a possibility where depositor deposits right befor loan repayement, so he can gain ?
+is ther a possibility where depositor deposits right 
+befor loan repayement, so he can gain ? => currently investigated
 
-§In OrderBook, MatchmarketBorrowOrder, is there a possibility where the pools with matching rate don't satify the loan Amount combined? in that case what happen to the collateral ?
+§In OrderBook, MatchmarketBorrowOrder, is there a possibility where the pools with matching 
+rate don't satify the loan Amount combined? in that case what happen to the collateral ? => to do
 
 when pool updated order, he must chekc of the amount to loan is withing the borrow cap,
-in such case the pool can revert  the borrow transaction if borrowcap exceeded
+in such case the pool can revert  the borrow transaction if borrowcap exceeded 
+same for when paused => to do 
 
-borrower can retrive more collate by insert limit borrower 
+borrower can retrive more collate by insert limit borrower => KO
