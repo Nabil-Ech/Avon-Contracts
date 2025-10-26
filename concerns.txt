@@ -19,6 +19,12 @@ pool manager can sabottage rival pool in favor of his => OK
 is ther a possibility where depositor deposits right 
 befor loan repayement, so he can gain ? => currently investigated
 
+similar concerns : liquidaion or protocolloss maight disturn the asst share balance indefenetly
+also there is no protection for borrower if that happen, they wil not be able to get 
+their coll back entireley even if they repay the same amount
+
+
+
 §In OrderBook, MatchmarketBorrowOrder, is there a possibility where the pools with matching 
 rate don't satify the loan Amount combined? in that case what happen to the collateral ? => to do
 

@@ -172,7 +172,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
     /// @dev This function allows whitelisted pools to insert their orders in the orderbook
     /// @dev The function will cancel all previous orders for the pool because as the liquidity changes the orders will be
     /// Updated by the pool and the previous orders will become invalid
-    function batchInsertOrder(uint64[] calldata irs, uint256[] calldata amounts) external whenNotPaused {
+    function batchInsertOrder(uint64[] calldata irs, uint256[] calldata amounts) external whenNotPaused returns (uint256[10] memory compositeks) { 
         uint256 length = irs.length;
         if (length != amounts.length) revert ErrorsLib.InvalidInput();
 
@@ -186,7 +186,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
             if (amounts[i] == 0) break;
             // there is a possibility where rs[i + 1] = irs[i]
             if (length > i + 1 && irs[i + 1] <= irs[i]) revert ErrorsLib.OrdersNotOrdered();
-            lenderTree._insertOrder(true, irs[i], uint64(ltv), amounts[i]);
+            compositeks[i] = lenderTree._insertOrder(true, irs[i], uint64(ltv), amounts[i]);
             poolOrders[msg.sender].push(irs[i]);
         }
     }
@@ -643,7 +643,7 @@ contract Orderbook is OrderbookStorage, Ownable2Step, Pausable, ReentrancyGuard 
             }
         }
     }
-    function getCompositkey(uint256 ir, uint256 ltv) external returns (uint256) {
+    function getCompositkey(uint64 ir, uint64 ltv) external returns (uint256) {
         return lenderTree.__getCompositkey(ir, ltv);
     }
 

@@ -118,7 +118,7 @@ library Liquidation {
 
         // 3) Update position & pool accounting
         // Seize collateral & burn borrow-shares
-        uint256 amountToSeize = Math.min(seizedAssets, position.collateral);
+        uint256 amountToSeize = Math.min(seizedAssets, position.collateral); // this can hurt the liquidator 
         position.collateral -= amountToSeize;
         position.borrowShares -= repaidShares;
 

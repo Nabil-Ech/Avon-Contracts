@@ -157,11 +157,11 @@ library AugmentedRedBlackTreeLib {
     /// @dev Inserts a new order with augmented data
     function insert(Tree storage tree, uint256 ir, uint256 ltv, uint256 amount, address account, uint256 timestamp)
         internal
-        returns (uint256 nodeIndex)
+        returns (uint256 nodeIndex, uint256 compositeKey)
     {
         uint256 safeAmount = amount;
         uint64 safeTimestamp = _convertToUint64(timestamp);
-        uint256 compositeKey = _packCompositeKey(ir, ltv);
+        compositeKey = _packCompositeKey(ir, ltv);
 
         (uint256 nodes, uint256 cursor, uint256 key) = _find(tree, compositeKey);
 
@@ -187,7 +187,7 @@ library AugmentedRedBlackTreeLib {
                 key := and(rootPacked, _BITMASK_KEY)
             }
         }
-        return key;
+        nodeIndex = key;
     }
 
     /// @dev Returns the number of unique values in the tree.
@@ -506,7 +506,7 @@ library AugmentedRedBlackTreeLib {
     }
 
     /// @dev Returns a uint64 from uint256, reverting if value exceeds maximum
-    function _convertToUint64(uint256 timestamp) internal pure returns (uint64) {
+    function _convertToUint64(uint256 timestamp) public pure returns (uint64) {
         if (timestamp > type(uint64).max) revert TimestampExceedsMaximum(timestamp);
         return uint64(timestamp);
     }
@@ -956,7 +956,7 @@ library AugmentedRedBlackTreeLib {
     }
 
     /// @dev Pack IR and LTV into a composite key for tree storage
-    function _packCompositeKey(uint256 ir, uint256 ltv) internal pure returns (uint256) {
+    function _packCompositeKey(uint256 ir, uint256 ltv) public pure returns (uint256) {
         if (ir > _IR_MASK) revert IRTooLarge(ir);
         if (ltv > _LTV_MASK) revert LTVTooLarge(ltv);
 

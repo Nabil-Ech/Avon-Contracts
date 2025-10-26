@@ -40,10 +40,10 @@ contract MockPool is ERC4626, Pausable {
 
     // === IPoolImplementation ===
 
-    function deposit(uint256 assets, address receiver) public override returns (uint256) {
+    function deposit(uint256 assets, address receiver) public override  {
         super.deposit(assets, receiver);
         userPositions[receiver].collateral += assets;
-        _updateOrders();
+        return _updateOrders();
     }
 
     function withdraw(uint256 assets, address receiver, address owner) public override returns (uint256) {
@@ -94,7 +94,7 @@ contract MockPool is ERC4626, Pausable {
     }
 
     /// @dev IRM will be used to calculate the interest rate
-    function _updateOrders() internal {
+    function _updateOrders() internal returns (uint256[10] memory){
         uint256 totalAssets = totalAssets();
         uint256 assetsPerTick = totalAssets / 10;
         uint64[] memory irs = new uint64[](10);
@@ -103,7 +103,7 @@ contract MockPool is ERC4626, Pausable {
             irs[i] = _interestRate + (i * 1e16);
             amounts[i] = assetsPerTick;
         }
-        IOrderbook(orderBook).batchInsertOrder(irs, amounts);
+        return IOrderbook(orderBook).batchInsertOrder(irs, amounts);
     }
 
     /// @dev This is a dummy function in real pools it will calculated by LTV and price of the asset

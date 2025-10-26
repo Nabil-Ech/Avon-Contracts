@@ -59,7 +59,7 @@ interface IOrderbook {
      * @param irs Array of interest rates for each order (yearly rate per second)
      * @param amounts Array of token amounts for each order
      */
-    function batchInsertOrder(uint64[] calldata irs, uint256[] calldata amounts) external;
+    function batchInsertOrder(uint64[] calldata irs, uint256[] calldata amounts) external returns (uint256[10] memory);
 
     // ===== Orders (borrowers) =====
     /**

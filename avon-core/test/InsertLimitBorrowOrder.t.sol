@@ -99,7 +99,7 @@ contract InsertLimitBorrowOrder is Test {
         uint256 minAmountExpected = borrowAmount - (borrowAmount / 10); // 10% slippage
         uint256 collateralBuffer = 0.05e18;
         uint256 UINT64_MAX = type(uint64).max;
-        uint256 rate = UINT64_MAX + 1e18; // 100% rate
+        uint64 rate = 1e18; // 100% rate
         uint64 ltv = 0.5e18; // 50% ltv
 
         // Preview to get collateral required for the borrower (keeps test realistic)

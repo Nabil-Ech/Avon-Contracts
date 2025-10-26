@@ -27,8 +27,10 @@ library OrderbookLib {
     /// @dev Minimum gas required to continue matching loop
     uint256 private constant MIN_REMAINING_GAS = 5000;
 
-    function __getCompositkey(AugmentedRedBlackTreeLib.Tree storage tree, uint256 ir, uint256 ltv) internal pure returns (uint256) {
-        return AugmentedRedBlackTreeLib._packCompositeKey(ir, ltv);
+    function __getCompositkey(AugmentedRedBlackTreeLib.Tree storage tree, uint64 rate, uint64 ltv) internal pure returns (uint256) {
+        (uint64 keyRate, uint64 keyLTV) = _convertToTreeKeys(true, rate, ltv);
+        return AugmentedRedBlackTreeLib._packCompositeKey(keyRate, keyLTV);
+        // return tree._packCompositeKey(ir, ltv);
     }
 
     function __getEntryAmount(AugmentedRedBlackTreeLib.Tree storage tree, uint256 compositeKey, uint256 index) internal view returns (uint256) {
@@ -54,13 +56,13 @@ library OrderbookLib {
         uint64 rate,
         uint64 ltv,
         uint256 amount
-    ) internal {
+    ) internal returns (uint256 comkey) {
         if (msg.sender == address(0)) revert ErrorsLib.InvalidInput();
         if (amount == 0 || rate == 0 || ltv < MIN_LTV || ltv > MAX_SAFE_LTV) revert ErrorsLib.InvalidInput();
 
         (uint64 keyRate, uint64 keyLTV) = _convertToTreeKeys(isLender, rate, ltv);
 
-        tree.insert(keyRate, keyLTV, amount, msg.sender, block.timestamp);
+        (, comkey) = tree.insert(keyRate, keyLTV, amount, msg.sender, block.timestamp);
 
         emit EventsLib.OrderInserted(isLender, msg.sender, rate, ltv, amount);
     }

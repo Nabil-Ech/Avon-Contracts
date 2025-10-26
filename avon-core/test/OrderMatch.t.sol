@@ -86,7 +86,10 @@ contract ordermanipultion is Test {
         vm.startPrank(lender);
         for (uint256 i = 0; i < pools.length; i++) {
             loanToken.approve(address(pools[i]), depositeAmount);
-            pools[i].deposit(depositeAmount, lender);
+            uint256[10] memory keys = pools[i].deposit(depositeAmount, lender);
+            for (uint256 j = 0; j < keys.length; j++) {
+                console.log("Pool", i, "deposit order key", j, ":", keys[j]);
+            }
             vm.warp(block.timestamp + 5 seconds);
             // ensure each pool created orders in the orderbook
             poolOrderIds = orderbook.getPoolOrders(address(pools[i]));
